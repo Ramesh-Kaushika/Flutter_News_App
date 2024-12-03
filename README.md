@@ -2,6 +2,10 @@
 
 A new Flutter project.
 
+# all dependencies install
+
+Run flutter pub get to install dependencies.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
