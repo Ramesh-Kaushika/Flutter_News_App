@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/view_models/news_provider.dart';
+import 'package:news_app/views/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,6 +21,6 @@ class MyApp extends StatelessWidget {
           title: 'News App',
           theme: ThemeData(primarySwatch: Colors.blue),
           home: HomeScreen(),
-    )
+    );
   }
 }
