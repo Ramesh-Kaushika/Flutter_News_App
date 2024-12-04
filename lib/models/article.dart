@@ -1,27 +1,24 @@
-class Article {
-  final String title;
-  final String description;
-  final String url;
-  final String imageUrl;
-  final String publishedAt;
+class CategoryModel {
+  String? categoryName;
 
-    Article({
-    required this.title,
-    required this.description,
-    required this.url,
-    required this.imageUrl,
-    required this.publishedAt,
+  CategoryModel({
+    this.categoryName,
   });
+}
 
-  
-  factory Article.fromJson(Map<String, dynamic> json){
-        return Article(
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      url: json['url'] ?? '',
-      imageUrl: json['urlToImage'] ?? '',
-      publishedAt: json['publishedAt'] ?? '',
-    );
-  }
+class NewsModel {
+  String? title;
+  String? description;
 
+  String? urlToImage;
+  String? author;
+  String? content;
+
+  NewsModel({
+    this.title,
+    this.description,
+    this.urlToImage,
+    this.author,
+    this.content,
+  });
 }

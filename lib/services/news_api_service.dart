@@ -1,21 +1,64 @@
-import 'package:news_app/models/article.dart';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:news_app/models/article.dart';
 
-
-class NewsApiService {
-  static const String _baseUrl = 'https://newsapi.org/v2';
-  static const String _apiKey = 'af1ec12c17314a37afe9569ec7640541';
-
-  Future<List<Article>> fetchTopHeadlines() async {
-    final response = await http.get(Uri.parse('$_baseUrl/top-headlines?country=us&apiKey=$_apiKey'));
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return (data['articles'] as List).map((json) => Article.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load news');
+class NewsApi {
+  // for news home screen
+  List<NewsModel> dataStore = [];
+  Future<void> getNews() async {
+    Uri url = Uri.parse(
+        "https://newsapi.org/v2/top-headlines?country=us&apiKey=313e712139fc486796d895c700aef894");
+    var response = await http.get(url);
+    var jsonData = jsonDecode(response.body);
+    if (jsonData["status"] == 'ok') {
+      jsonData["articles"].forEach((element) {
+        if (element['urlToImage'] != null &&
+            element['description'] != null &&
+            element['author'] != null &&
+            element['content'] != null) {
+          NewsModel newsModel = NewsModel(
+            title: element['title'], // name must be same fron api
+            urlToImage: element['urlToImage'],
+            description: element['description'],
+            author: element['author'],
+            content: element['content'],
+          );
+          dataStore.add(newsModel);
+        }
+      });
     }
-
   }
 }
+
+class CategoryNews {
+  // for news home screen
+  List<NewsModel> dataStore = [];
+  Future<void> getNews(String category) async {
+    Uri url = Uri.parse(
+        "https://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=af1ec12c17314a37afe9569ec7640541");
+    var response = await http.get(url);
+    var jsonData = jsonDecode(response.body);
+
+    if (jsonData["status"] == 'ok') {
+      jsonData["articles"].forEach((element) {
+        if (element['urlToImage'] != null &&
+            element['description'] != null &&
+            element['author'] != null &&
+            element['content'] != null) {
+          NewsModel newsModel = NewsModel(
+            title: element['title'], // name must be same fron api
+            urlToImage: element['urlToImage'],
+            description: element['description'],
+            author: element['author'],
+            content: element['content'],
+          );
+          dataStore.add(newsModel);
+        }
+      });
+    }
+  }
+}
+// for category news
+// we have used the free news api. for that, first you need to create a account and  then login 
+// after that get the api key  
