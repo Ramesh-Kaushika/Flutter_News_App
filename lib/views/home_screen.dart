@@ -22,11 +22,15 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   bool isSearching = false;
   TextEditingController searchController = TextEditingController();
 
+  String selectedSortBy = 'relevancy'; // Default sorting
+
   getNews() async {
     NewsApi newsApi = NewsApi();
     await newsApi.getNews(
       country: 'us',
       query: searchTerm,
+
+      sortBy: selectedSortBy, // Pass selected sortBy
     );
     articles = newsApi.dataStore;
     setState(() {
@@ -128,17 +132,22 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.only(left: 15),
-                        child: const Text(
-                          "Top Headlines",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold, // Makes the text bold
-                            fontSize: 21,
+                      Row(
+                        children: [
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.only(left: 15),
+                            child: const Text(
+                              "Top Headlines",
+                              style: TextStyle(
+                                fontWeight:
+                                    FontWeight.bold, // Makes the text bold
+                                fontSize: 21,
+                              ),
+                            ),
                           ),
-                          
-                        ),
+                          sortDropdown()
+                        ],
                       ),
                       // for home screen news
                       ListView.builder(
@@ -274,4 +283,31 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
       ],
     );
   }
+}
+
+Widget sortDropdown() {
+  return DropdownButton<String>(
+    value: selectedSortBy,
+    items: const [
+      DropdownMenuItem(
+        value: 'relevancy',
+        child: Text('Relevance'),
+      ),
+      DropdownMenuItem(
+        value: 'popularity',
+        child: Text('Popularity'),
+      ),
+      DropdownMenuItem(
+        value: 'publishedAt',
+        child: Text('Published Date'),
+      ),
+    ],
+    onChanged: (value) {
+      setState(() {
+        selectedSortBy = value!;
+        isLoadin = true;
+        getNews();
+      });
+    },
+  );
 }
