@@ -102,7 +102,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                               padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: Colors.blue),
+                                  color: Colors.red),
                               child: Center(
                                 child: Text(
                                   category.categoryName!,
@@ -205,7 +205,9 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
               searchTerm = searchController.text;
               getNews();
             });
-          }, icon: const Icon(Icons.search))
+          }, icon: const Icon(Icons.search,
+           size: 30,
+          ))
         ],
       );
   }
@@ -223,7 +225,9 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
              setState(() {
               isSearching = true;
             });
-          }, icon: const Icon(Icons.search))
+          }, icon: const Icon(Icons.search,
+          size: 30,
+          ))
         ],
       );
   }
