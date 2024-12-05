@@ -62,6 +62,3 @@ class CategoryNews {
     }
   }
 }
-// for category news
-// we have used the free news api. for that, first you need to create a account and  then login 
-// after that get the api key  
