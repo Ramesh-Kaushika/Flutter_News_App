@@ -138,6 +138,9 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                               ),
                             ),
                           ),
+                          const SizedBox(
+                            width: 100,
+                          ),
                           sortDropdown()
                         ],
                       ),
@@ -277,29 +280,36 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   }
 
   sortDropdown() {
-    return DropdownButton<String>(
-      value: selectedSortBy,
-      items: const [
-        DropdownMenuItem(
-          value: 'relevancy',
-          child: Text('Relevance'),
-        ),
-        DropdownMenuItem(
-          value: 'popularity',
-          child: Text('Popularity'),
-        ),
-        DropdownMenuItem(
-          value: 'publishedAt',
-          child: Text('Published Date'),
-        ),
-      ],
-      onChanged: (value) {
-        setState(() {
-          selectedSortBy = value!;
-          isLoadin = true;
-          getNews();
-        });
-      },
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      decoration: BoxDecoration(
+        color: Colors.grey[200], // Set your desired background color here
+        borderRadius: BorderRadius.circular(8), // Optional: Rounded corners
+      ),
+      child: DropdownButton<String>(
+        value: selectedSortBy,
+        items: const [
+          DropdownMenuItem(
+            value: 'relevancy',
+            child: Text('Relevance'),
+          ),
+          DropdownMenuItem(
+            value: 'popularity',
+            child: Text('Popularity'),
+          ),
+          DropdownMenuItem(
+            value: 'publishedAt',
+            child: Text('Published Date'),
+          ),
+        ],
+        onChanged: (value) {
+          setState(() {
+            selectedSortBy = value!;
+            isLoadin = true;
+            getNews();
+          });
+        },
+      ),
     );
   }
 }
