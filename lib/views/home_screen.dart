@@ -20,6 +20,13 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   List<NewsModel> articles = [];
   List<CategoryModel> categories = [];
   bool isLoadin = true;
+
+  String? searchTerm;
+  bool isSearching = false;
+  TextEditingController searchContoller = TextEditingController();
+
+
+
   getNews() async {
     NewsApi newsApi = NewsApi();
     await newsApi.getNews();
@@ -39,14 +46,15 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Flutte News App",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      appBar: isSearching? searchAppBar() : appBar(), 
+      // AppBar(
+        // title: const Text(
+        //   "News App",
+        //   style: TextStyle(
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
+      // ),
       body: isLoadin
           ? const Center(
               child: CircularProgressIndicator(),
@@ -151,4 +159,38 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
             ),
     );
   }
+  
+  searchAppBar() {
+    return AppBar(
+        title: const Text(
+          "News App",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            setState(() {
+              isSearching = false;
+            });
+          }, 
+          icon: const Icon(Icons.arrow_back)),
+      );
+  }
+  
+  appBar() {
+    return AppBar(
+        title: const Text(
+          "News App",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+        ],
+      );
+  }
 }
+
+
