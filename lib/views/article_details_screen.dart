@@ -20,6 +20,7 @@ class NewsDetail extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
+               textAlign: TextAlign.center,
             ),
             Row(
               children: [
@@ -28,6 +29,9 @@ class NewsDetail extends StatelessWidget {
                 ),
                 Expanded(
                     child: Text(
+                      style: const TextStyle(
+                        color: Colors.red
+                      ),
                   "- ${newsModel.author!}",
                   maxLines: 1,
                 ))
@@ -39,15 +43,16 @@ class NewsDetail extends StatelessWidget {
             Text(
               newsModel.content!,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
             const SizedBox(height: 10),
             Text(
               newsModel.description!,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 16,
               ),
+          
             )
           ],
         ),
