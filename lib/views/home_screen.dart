@@ -289,7 +289,9 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
           onPressed: () {
             refreshNews();
           },
-          icon: const Icon(Icons.refresh),
+          icon: const Icon(Icons.refresh,
+          size: 30,
+          ),
         ),
       ],
     );
