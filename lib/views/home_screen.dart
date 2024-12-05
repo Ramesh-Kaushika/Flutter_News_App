@@ -45,6 +45,13 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
     super.initState();
   }
 
+  void refreshNews() {
+    setState(() {
+      isLoadin = true; // Show loading indicator
+    });
+    getNews(); // Re-fetch the news articles
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +146,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                             ),
                           ),
                           const SizedBox(
-                            width: 100,
+                            width: 88,
                           ),
                           sortDropdown()
                         ],
@@ -258,23 +265,32 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
 
   appBar() {
     return AppBar(
-      title: const Text(
-        "News App",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
+      leading: IconButton(
+        onPressed: () {
+          setState(() {
+            isSearching = true;
+          });
+        },
+        icon: const Icon(
+          Icons.search,
+          size: 30,
+        ),
+      ),
+      title: const Center(
+        child: Text(
+          "News App",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       actions: [
         IconButton(
-            onPressed: () {
-              setState(() {
-                isSearching = true;
-              });
-            },
-            icon: const Icon(
-              Icons.search,
-              size: 30,
-            ))
+          onPressed: () {
+            refreshNews();
+          },
+          icon: const Icon(Icons.refresh),
+        ),
       ],
     );
   }
