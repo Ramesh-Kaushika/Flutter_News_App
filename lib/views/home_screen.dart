@@ -97,15 +97,16 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                                   alignment: Alignment.center,
                                   padding: const EdgeInsets.all(15),
                                   decoration: BoxDecoration(
-                                    boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black
-                                        .withOpacity(0.2), // Shadow color
-                                    blurRadius: 10, // Softness of the shadow
-                                    offset: const Offset(
-                                        0, 4), // Shadow position (x, y)
-                                  ),
-                                ],
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black
+                                              .withOpacity(0.2), // Shadow color
+                                          blurRadius:
+                                              10, // Softness of the shadow
+                                          offset: const Offset(
+                                              0, 4), // Shadow position (x, y)
+                                        ),
+                                      ],
                                       borderRadius: BorderRadius.circular(20),
                                       color: Colors.red),
                                   child: Center(
@@ -122,6 +123,21 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                               ),
                             );
                           },
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.only(left: 15),
+                        child: const Text(
+                          "Top Headlines",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold, // Makes the text bold
+                            fontSize: 21,
+                          ),
+                          
                         ),
                       ),
                       // for home screen news
@@ -170,14 +186,14 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                                   ),
                                   const SizedBox(height: 10),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 6, right: 6, bottom: 6 ),
+                                    padding: const EdgeInsets.only(
+                                        left: 6, right: 6, bottom: 6),
                                     child: Text(
                                       article.title!,
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 18,
                                       ),
-                                    
                                     ),
                                   ),
                                   // const Divider(thickness: 2),
