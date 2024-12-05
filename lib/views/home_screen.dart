@@ -44,6 +44,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: isSearching ? searchAppBar() : appBar(),
       // AppBar(
       // title: const Text(
@@ -96,6 +97,15 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                                   alignment: Alignment.center,
                                   padding: const EdgeInsets.all(15),
                                   decoration: BoxDecoration(
+                                    boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black
+                                        .withOpacity(0.2), // Shadow color
+                                    blurRadius: 10, // Softness of the shadow
+                                    offset: const Offset(
+                                        0, 4), // Shadow position (x, y)
+                                  ),
+                                ],
                                       borderRadius: BorderRadius.circular(20),
                                       color: Colors.red),
                                   child: Center(
@@ -160,7 +170,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
                                   ),
                                   const SizedBox(height: 10),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                                    padding: const EdgeInsets.only(left: 6, right: 6, bottom: 6 ),
                                     child: Text(
                                       article.title!,
                                       style: const TextStyle(
