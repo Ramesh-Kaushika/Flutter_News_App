@@ -62,6 +62,13 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
+            : articles.isEmpty
+             ? const Center(
+              child: Text(
+                "No articles found. Try a different search term.",
+                style: TextStyle(fontSize: 16),
+              ),
+            )
           : SingleChildScrollView(
               child: Column(
                 children: [
@@ -184,6 +191,7 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
           onPressed: () {
             setState(() {
               isSearching = false;
+              searchTerm = null;
               searchController.text = "";
               getNews();
               
