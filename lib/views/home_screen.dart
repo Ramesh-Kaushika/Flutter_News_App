@@ -50,14 +50,6 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: isSearching ? searchAppBar() : appBar(),
-      // AppBar(
-      // title: const Text(
-      //   "News App",
-      //   style: TextStyle(
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      // ),
-      // ),
       body: isLoadin
           ? const Center(
               child: CircularProgressIndicator(),
@@ -283,31 +275,31 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
       ],
     );
   }
-}
 
-Widget sortDropdown() {
-  return DropdownButton<String>(
-    value: selectedSortBy,
-    items: const [
-      DropdownMenuItem(
-        value: 'relevancy',
-        child: Text('Relevance'),
-      ),
-      DropdownMenuItem(
-        value: 'popularity',
-        child: Text('Popularity'),
-      ),
-      DropdownMenuItem(
-        value: 'publishedAt',
-        child: Text('Published Date'),
-      ),
-    ],
-    onChanged: (value) {
-      setState(() {
-        selectedSortBy = value!;
-        isLoadin = true;
-        getNews();
-      });
-    },
-  );
+  sortDropdown() {
+    return DropdownButton<String>(
+      value: selectedSortBy,
+      items: const [
+        DropdownMenuItem(
+          value: 'relevancy',
+          child: Text('Relevance'),
+        ),
+        DropdownMenuItem(
+          value: 'popularity',
+          child: Text('Popularity'),
+        ),
+        DropdownMenuItem(
+          value: 'publishedAt',
+          child: Text('Published Date'),
+        ),
+      ],
+      onChanged: (value) {
+        setState(() {
+          selectedSortBy = value!;
+          isLoadin = true;
+          getNews();
+        });
+      },
+    );
+  }
 }
