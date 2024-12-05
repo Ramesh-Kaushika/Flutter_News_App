@@ -6,7 +6,7 @@ import 'package:news_app/models/article.dart';
 class NewsApi {
   // for news home screen
   List<NewsModel> dataStore = [];
-  Future<void> getNews() async {
+  Future<void> getNews({String? query, required String country}) async {
     Uri url = Uri.parse(
         "https://newsapi.org/v2/top-headlines?country=us&apiKey=313e712139fc486796d895c700aef894");
     var response = await http.get(url);

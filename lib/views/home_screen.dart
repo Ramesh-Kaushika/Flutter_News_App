@@ -23,13 +23,16 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
 
   String? searchTerm;
   bool isSearching = false;
-  TextEditingController searchContoller = TextEditingController();
+  TextEditingController searchController = TextEditingController();
 
 
 
   getNews() async {
     NewsApi newsApi = NewsApi();
-    await newsApi.getNews();
+    await newsApi.getNews(
+      country : 'us',
+      query: searchTerm,
+    );
     articles = newsApi.dataStore;
     setState(() {
       isLoadin = false;
@@ -162,19 +165,40 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
   
   searchAppBar() {
     return AppBar(
-        title: const Text(
-          "News App",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
+        title: TextField(
+          controller: searchController,
+          style: const TextStyle(color: Colors.black),
+          cursorColor: Colors.black,
+          decoration: const InputDecoration(
+            hintText: "Search",
+            hintStyle: TextStyle(color: Colors.black38),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent),
+            )
           ),
         ),
         leading: IconButton(
           onPressed: () {
             setState(() {
               isSearching = false;
+              searchController.text = "";
+              getNews();
+              
             });
           }, 
-          icon: const Icon(Icons.arrow_back)),
+          icon: const Icon(Icons.arrow_back),
+          ),
+           actions: [
+          IconButton(onPressed: () {
+            setState(() {
+              searchTerm = searchController.text;
+              getNews();
+            });
+          }, icon: const Icon(Icons.search))
+        ],
       );
   }
   
@@ -187,7 +211,11 @@ class _NewsHomeScreenState extends State<NewsHomeScreen> {
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+          IconButton(onPressed: () {
+             setState(() {
+              isSearching = true;
+            });
+          }, icon: const Icon(Icons.search))
         ],
       );
   }
